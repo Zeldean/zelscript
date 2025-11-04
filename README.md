@@ -2,6 +2,15 @@
 
 Small, single-purpose CLI helpers that plug into the wider Zel suite.
 
+## Getting Started
+
+**First, install the Zel ecosystem:**
+```bash
+curl -sSL https://raw.githubusercontent.com/Zeldean/zelutil/main/bootstrap-zel.py | python3
+```
+
+This sets up ZelUtil and makes all Zel tools available. See the [ZelUtil repository](https://github.com/Zeldean/zelutil) for details.
+
 ---
 
 ## Installation
