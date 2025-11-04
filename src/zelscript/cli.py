@@ -2,7 +2,8 @@
 import click
 from pathlib import Path
 
-from .commands import choice, welcome, timer
+from .commands import choice, timer
+from .commands.welcome import welcome as welcome_func
 from .commands.rename_sequential import rename
 from .commands.convert_to_png import convert_to_png
 
@@ -20,7 +21,7 @@ def choose(options):
 @script.command()
 def welcome():
     """Display welcome message with ASCII art"""
-    welcome.welcome()
+    welcome_func()
 
 @script.command()
 @click.argument('work', type=int, default=25)
