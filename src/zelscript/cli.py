@@ -2,7 +2,8 @@
 import click
 from pathlib import Path
 
-from .commands import choice, timer
+from .commands.choice import choose as choose_func
+from .commands.timer import timer as timer_func
 from .commands.welcome import welcome as welcome_func
 from .commands.rename_sequential import rename
 from .commands.convert_to_png import convert_to_png
@@ -16,7 +17,7 @@ def script():
 @click.argument('options', nargs=-1, required=True)
 def choose(options):
     """Make a choice from given options (runs 11 rounds + winner)"""
-    choice.choose(options)
+    choose_func(options)
 
 @script.command()
 def welcome():
@@ -29,7 +30,7 @@ def welcome():
 @click.argument('cycles', type=int, default=4)
 def timer(work, rest, cycles):
     """Start a Pomodoro timer"""
-    timer.timer(work, rest, cycles)
+    timer_func(work, rest, cycles)
 
 @script.command("rename")
 @click.argument("folder", type=click.Path(exists=True, file_okay=False, path_type=Path))
