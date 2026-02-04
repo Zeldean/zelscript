@@ -7,6 +7,7 @@ from .commands.timer import timer as timer_func
 from .commands.welcome import welcome as welcome_func
 from .commands.rename_sequential import rename
 from .commands.convert_to_png import convert_to_png
+from .commands.img_resize import main as img_resize_main
 
 @click.group()
 def script():
@@ -18,11 +19,6 @@ def script():
 def choose(options):
     """Make a choice from given options (runs 11 rounds + winner)"""
     choose_func(options)
-
-@script.command()
-def welcome():
-    """Display welcome message with ASCII art"""
-    welcome_func()
 
 @script.command()
 @click.argument('work', type=int, default=25)
@@ -44,8 +40,18 @@ def convert_png(folder: Path):
     """Convert all non-PNG images to PNG format"""
     convert_to_png(str(folder))
 
-# Main CLI entry point
-cli = script
-
-if __name__ == '__main__':
-    script()
+@script.command("resize")
+@click.argument("input_path", type=click.Path(exists=True, file_okay=True, path_type=Path))
+@click.argument("output_path", type=click.Path(path_type=Path), required=False)
+def resize_image(input_path: Path, output_path: Path = None):
+    """Resize image to 600x200 while preserving aspect ratio"""
+    import sys
+    original_argv = sys.argv
+    if output_path:
+        sys.argv = ["img_resize", str(input_path), str(output_path)]
+    else:
+        sys.argv = ["img_resize", str(input_path)]
+    try:
+        img_resize_main()
+    finally:
+        sys.argv = original_argv

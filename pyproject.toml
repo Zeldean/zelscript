@@ -4,14 +4,14 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "zelscript"
-version = "0.1.0"
+version = "0.1.2"
 description = "Small, single-purpose CLI helpers that plug into the wider Zel suite"
 authors = [{name = "Zeldean", email = "deanvanzyl2004@gmail.com"}]
 dependencies = ["click", "Pillow"]
 requires-python = ">=3.8"
 
 [project.scripts]
-zelscript = "zelscript.cli:cli"
+zelscript = "zelscript.cli:script"
 
 [tool.setuptools.packages.find]
 where = ["src"]
