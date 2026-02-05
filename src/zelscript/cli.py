@@ -7,6 +7,7 @@ from .commands.timer import timer as timer_func
 from .commands.welcome import welcome as welcome_func
 from .commands.rename_sequential import rename
 from .commands.convert_to_png import convert_to_png
+from .commands.sleep_timer import sleep_timer as sleep_timer_func
 from .commands.img_resize import main as img_resize_main
 
 @click.group()
@@ -39,6 +40,12 @@ def rename_sequential(folder: Path):
 def convert_png(folder: Path):
     """Convert all non-PNG images to PNG format"""
     convert_to_png(str(folder))
+
+@script.command("sleep-timer")
+@click.argument('minutes', type=float)
+def sleep_timer(minutes):
+    """Put PC to sleep after specified minutes"""
+    sleep_timer_func(minutes)
 
 @script.command("resize")
 @click.argument("input_path", type=click.Path(exists=True, file_okay=True, path_type=Path))
